@@ -3,11 +3,14 @@ import { Column, Model, Table } from 'sequelize-typescript';
 @Table
 export class User extends Model {
   @Column
-  firstName: string;
+  declare firstName: string;
 
   @Column
-  lastName: string;
+  declare lastName: string;
 
-  @Column({ defaultValue: true })
-  isActive: boolean;
+  @Column
+  declare email: string;
+
+  // @Column({ defaultValue: true })
+  // isActive: boolean;
 }

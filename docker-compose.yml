@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mariadb:11
+    container_name: nestdb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-testdb}
+      MYSQL_USER: ${MYSQL_USER:-nestuser}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-nestpass}
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"          # expose only if you want to connect from host
+
+  # app:
+  #   build: .
+  #   container_name: nestapp
+  #   environment:
+  #     # Pass DB env vars through to the app
+  #     DB_HOST: db
+  #     DB_PORT: 3306
+  #     DB_USERNAME: ${MYSQL_USER:-nestuser}
+  #     DB_PASSWORD: ${MYSQL_PASSWORD:-nestpass}
+  #     DB_DATABASE: ${MYSQL_DATABASE:-testdb}
+  #     PORT: 3000
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     # Mount source for hot‑reload during dev; remove for prod
+  #     - .:/app
+  #     - /app/node_modules
+  #   command: npm run start:dev
+
+volumes:
+  db-data:
+  
